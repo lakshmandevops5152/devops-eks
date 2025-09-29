@@ -1,10 +1,10 @@
-ipeline {
+pipeline {
     agent any
 
     parameters {
         choice(
             name: 'ENV',
-            choices: ['Dev', 'ST', 'eks' ,],
+            choices: ['Dev', 'ST', 'eks'],
             description: 'Select the environment to deploy'
         )
     }
@@ -19,8 +19,8 @@ ipeline {
         stage('Terraform Init') {
             steps {
                 ansiColor('xterm') {
-                    dir("${params.ENV}") {   // 👈 dynamically use selected env folder
-                        sh 'terraform init -reconfigure'
+                    dir("${params.ENV}") {   // dynamically use selected env folder
+                        sh 'terraform init'
                     }
                 }
             }
@@ -31,7 +31,7 @@ ipeline {
                 ansiColor('xterm') {
                     dir("${params.ENV}") {
                         sh 'terraform plan -out=tfplan'
-                        sh 'terraform show tfplan'
+                        sh 'terraform show -no-color tfplan'
                     }
                 }
             }
