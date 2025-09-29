@@ -20,7 +20,9 @@ pipeline {
             steps {
                 ansiColor('xterm') {
                     dir("${params.ENV}") {   // dynamically use selected env folder
-                        sh 'terraform init'
+                        // Clean any previous init and reconfigure backend
+                        sh 'rm -rf .terraform/ terraform.tfstate*'
+                        sh 'terraform init -input=false -reconfigure'
                     }
                 }
             }
