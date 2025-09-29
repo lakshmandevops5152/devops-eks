@@ -20,7 +20,7 @@ pipeline {
             steps {
                 ansiColor('xterm') {
                     dir("${params.ENV}") {   // 👈 dynamically use selected env folder
-                        sh 'terraform init '
+                        sh 'terraform init'
                     }
                 }
             }
