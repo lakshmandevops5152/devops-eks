@@ -1,7 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "
-lakshman-trraform"
+    bucket = "lakshman-trraform"
     key    = "eks/terraform.tfstate"
     region = "ap-south-1"
   }
